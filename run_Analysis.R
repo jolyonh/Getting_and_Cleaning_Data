@@ -11,6 +11,8 @@ download.file(webFile,temp, mode="wb")
 # Unzip the file
 unzip(temp)
 
+# Move into the data directory
+setwd("UCI HAR Dataset")
 
 # Load the data.table library
 library(data.table)
@@ -71,6 +73,9 @@ for (ii in 1:dim(data[1])){
   y <- as.character(activity.labels$V2[activity.labels$V1==x])
   data[ii,2] <- y
 }
+
+# Output the tidy data
+write.table(data, file="Tidy_Data.txt", row.names=FALSE)
 
 # Convert to a dplyr object
 data_dplyr <- tbl_df(data)
